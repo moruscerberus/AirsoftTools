@@ -38,6 +38,12 @@
   <!-- Toast Notification -->
   <div id="toast" class="fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-6 py-3 rounded shadow-md hidden z-50"></div>
 
+
+  <!-- Share Link Button -->
+  <div class="fixed top-4 right-4 z-50">
+    <button onclick="copyShareableLink()" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded">🔗 Share Config</button>
+  </div>
+
   <!-- Sticky Bottom Action Bar -->
   <div class="fixed bottom-0 w-full bg-gray-800 dark:bg-gray-700 text-white p-3 z-50 shadow-lg flex justify-center gap-4 flex-wrap">
     <button onclick="calculateAll()" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded transition">Calculate</button>
@@ -122,6 +128,44 @@
   </div>
 
   <script>
+    function copyShareableLink() {
+      const params = new URLSearchParams({
+        v: document.getElementById("velocity").value,
+        u: document.getElementById("unit").value,
+        e: document.getElementById("energy").value,
+        w: document.getElementById("weights").value,
+        d: document.getElementById("deviation").value,
+        ws: document.getElementById("windSpeed").value,
+        wd: document.getElementById("windDir").value
+      });
+      const url = `${location.origin}${location.pathname}?${params.toString()}`;
+      navigator.clipboard.writeText(url);
+      showToast("🔗 Link copied to clipboard!");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const assign = (id, key) => {
+      const el = document.getElementById(id);
+      if (el && params.has(key)) {
+        el.value = params.get(key);
+      }
+    };
+
+    assign("velocity", "v");
+    assign("unit", "u");
+    assign("energy", "e");
+    assign("weights", "w");
+    assign("deviation", "d");
+    assign("windSpeed", "ws");
+    assign("windDir", "wd");
+
+    updateProfileDropdown();
+
+    if (params.has("v") && params.has("e") && params.has("w")) {
+      calculateAll(); // Trigger auto calculation on load
+    }
+  });
     const icon = document.getElementById('themeIcon');
     document.getElementById("darkModeToggle").onclick = () => {
       const root = document.documentElement;
@@ -277,6 +321,7 @@
         if (el) el.value = v;
       });
       showToast("📦 Profile loaded");
+      calculateAll();
     }
 
     function deleteProfile() {
