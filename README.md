@@ -1,4 +1,3 @@
-
 # AirsoftTools
 
 **AirsoftTools** is a sleek, mobile-friendly ballistics and safety calculator tailored for airsoft players.
@@ -110,6 +109,7 @@ http://127.0.0.1:8000
 
 | Feature                          | Status     |
 | -------------------------------- | ---------- |
+| Add More Safety Standards        | 🕐 Planned |
 | PWA Support (Offline Mode)       | 🕐 Planned |
 | Legal Mode Toggle by Country     | ✅ Done    |
 | Community Presets Upload/Import  | ✅ Done    |
