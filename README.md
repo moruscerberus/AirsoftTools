@@ -2,8 +2,6 @@
 
 **AirsoftTools** is a sleek, mobile-friendly ballistics and safety calculator tailored for airsoft players.
 
-Created with ❤️ by **moruscerberus**
-
 ---
 
 ## 📸 Features
